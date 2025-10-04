@@ -8,6 +8,8 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from llm_dir.openai_llm import get_openai_response
 from utils.twilio import sendMessage
+from dotenv import load_dotenv
+import os
 
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 
@@ -16,6 +18,10 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 token_path = os.path.join(BASE_DIR, '..', 'token.pickle')  # adjust if needed
 token_path = os.path.abspath(token_path)
+
+
+load_dotenv(f"{BASE_DIR}/.env")
+
 
 
 def authenticate_gmail():

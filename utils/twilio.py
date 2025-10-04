@@ -23,5 +23,5 @@ def sendMessage(body, to):
     print("Message SID:", message.sid)
 
     # Check message status
-    fetched_message = client.messages(message.sid).fetch()
+    fetched_message = client.messages('SMa1659201a4c5eb560a70f4c9b9f781f8').fetch()
     print("Message Status:", fetched_message.status)
