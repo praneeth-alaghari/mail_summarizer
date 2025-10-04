@@ -67,6 +67,8 @@ Email Summarizer automates your inbox chaos! It fetches your recent Gmail emails
     
     python -m email_summarizer.email_summary
 
+    Note : based on os, few adjustments to be done in terms of env/secrets configuration 
+
 🎯 Conclusion
 
 Email Summarizer keeps you in the loop without the overwhelm. It’s a neat combo of Gmail, OpenAI, and Twilio magic — all wrapped securely in environment variables.
