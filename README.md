@@ -23,6 +23,8 @@ Email Summarizer automates your inbox chaos! It fetches your recent Gmail emails
     
     WhatsApp Delivery – Sends the summary as a WhatsApp message via Twilio.
 
+    cronjob/task scheduler - this job can be executed based on user's interest at single/multiple times in a day 
+
 
 ⚡ Prerequisites
 
