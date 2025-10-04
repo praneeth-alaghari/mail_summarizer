@@ -1,5 +1,10 @@
+import os
+from dotenv import load_dotenv
 import openai
-from infra.openai_secrets import OPENAI_API_KEY
+
+load_dotenv()
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 def get_openai_response(prompt):
 

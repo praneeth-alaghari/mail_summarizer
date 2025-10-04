@@ -1,10 +1,21 @@
+import os
+from dotenv import load_dotenv
 from twilio.rest import Client
-from infra.twilio_auth_token import ACCOUNT_SID, AUTH_TOKEN
-from infra.openai_secrets import OPENAI_API_KEY
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Fetch secrets from environment variables
+AUTH_TOKEN = os.getenv("AUTH_TOKEN")
+ACCOUNT_SID = os.getenv("ACCOUNT_SID")
 
 def sendMessage(body, to):
     account_sid = ACCOUNT_SID
     auth_token = AUTH_TOKEN
+
+    print(account_sid)
+    print(auth_token)
+
     client = Client(account_sid, auth_token)
 
     message = client.messages.create(
@@ -12,4 +23,8 @@ def sendMessage(body, to):
         body=f'Here is your daily email summary!\n\n {body}',
         to=f'whatsapp:+91{to}'
     )
-    print("Message sent successfully. Message SID:", message.sid)
+    print("Message SID:", message.sid)
+
+    # Check message status
+    fetched_message = client.messages(message.sid).fetch()
+    print("Message Status:", fetched_message.status)
