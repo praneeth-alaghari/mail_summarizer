@@ -9,7 +9,6 @@ from googleapiclient.discovery import build
 from llm_dir.openai_llm import get_openai_response
 from utils.twilio import sendMessage
 
-
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 
 def authenticate_gmail():
@@ -23,7 +22,7 @@ def authenticate_gmail():
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
                 'infra/gmail_api_credentials.json', SCOPES)
-            credentials = flow.run_local_server(port=0)
+            credentials = flow.run_console()  # Changed to run_console
         with open('token.pickle', 'wb') as token:
             pickle.dump(credentials, token)
 
@@ -75,9 +74,10 @@ if __name__ == "__main__":
 
     sendMessage(summary, "9573340942")  # Replace with the actual phone number
     
+    # Uncomment below to print recent emails if needed
     # print("Recent Emails Received in the Last 24 Hours:")
     # print(f"{'Sender Email':<30} {'Received Time':<20} {'Subject':<50}")
     # print("=" * 100)
     # for email in recent_emails:
-    #    print(f"{email['from']:<30} {email['date']:<20} {email['subject']:<50}")
+    #     print(f"{email['from']:<30} {email['date']:<20} {email['subject']:<50}")
 

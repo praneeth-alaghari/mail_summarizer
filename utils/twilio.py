@@ -13,9 +13,6 @@ def sendMessage(body, to):
     account_sid = ACCOUNT_SID
     auth_token = AUTH_TOKEN
 
-    print(account_sid)
-    print(auth_token)
-
     client = Client(account_sid, auth_token)
 
     message = client.messages.create(
