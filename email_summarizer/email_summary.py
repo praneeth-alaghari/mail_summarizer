@@ -11,10 +11,18 @@ from utils.twilio import sendMessage
 
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 
+# Get the directory where the script is located
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+token_path = os.path.join(BASE_DIR, '..', 'token.pickle')  # adjust if needed
+token_path = os.path.abspath(token_path)
+
+
 def authenticate_gmail():
     credentials = None
-    if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
+
+    if os.path.exists(token_path):
+        with open(token_path, 'rb') as token:
             credentials = pickle.load(token)
     if not credentials or not credentials.valid:
         if credentials and credentials.expired and credentials.refresh_token:
@@ -22,7 +30,7 @@ def authenticate_gmail():
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
                 'infra/gmail_api_credentials.json', SCOPES)
-            credentials = flow.run_console()  # Changed to run_console
+            credentials = flow.run_local_server(port=0, success_message='The authentication flow has completed successfully.')
         with open('token.pickle', 'wb') as token:
             pickle.dump(credentials, token)
 
