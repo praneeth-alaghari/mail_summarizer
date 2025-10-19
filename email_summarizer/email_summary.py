@@ -62,7 +62,8 @@ def fetch_recent_emails(service):
 
     return emails
 
-if __name__ == "__main__":
+
+def get_summary():
     creds = authenticate_gmail()
     service = build('gmail', 'v1', credentials=creds)
     
@@ -82,6 +83,11 @@ if __name__ == "__main__":
     # Directly pass the fetched emails to the OpenAI function
     summary = get_openai_response(prompt)
 
+    return summary
+
+
+if __name__ == "__main__":
+    summary = get_summary()
     # Print the output from the OpenAI response
     print("Summary of Recent Emails Received in the Last 24 Hours:")
     print(summary)
